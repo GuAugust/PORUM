@@ -355,18 +355,18 @@ section {
     margin: 0 auto;
 }
 
-/* Manifesto Section */
-.manifesto {
+/* Chamado Section */
+.Chamado {
     background: var(--bg-secondary);
 }
 
-.manifesto-grid {
+.Chamado-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
 }
 
-.manifesto-item {
+.Chamado-item {
     background: white;
     padding: 2rem;
     border-radius: 1rem;
@@ -376,7 +376,7 @@ section {
     overflow: hidden;
 }
 
-.manifesto-item::before {
+.Chamado-item::before {
     content: '';
     position: absolute;
     top: 0;
@@ -386,12 +386,12 @@ section {
     background: var(--gradient-primary);
 }
 
-.manifesto-item:hover {
+.Chamado-item:hover {
     transform: translateY(-5px);
     box-shadow: var(--shadow-xl);
 }
 
-.manifesto-number {
+.Chamado-number {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -405,14 +405,14 @@ section {
     margin-bottom: 1rem;
 }
 
-.manifesto-title {
+.Chamado-title {
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 1rem;
     color: var(--text-primary);
 }
 
-.manifesto-description {
+.Chamado-description {
     color: var(--text-secondary);
     line-height: 1.7;
 }
@@ -727,7 +727,7 @@ section {
         font-size: 2rem;
     }
 
-    .manifesto-grid,
+    .Chamado-grid,
     .valores-grid,
     .compromisso-grid {
         grid-template-columns: 1fr;
@@ -756,7 +756,7 @@ section {
         font-size: 2rem;
     }
 
-    .manifesto-item,
+    .Chamado-item,
     .valor-item,
     .compromisso-item {
         padding: 1.5rem;
@@ -783,7 +783,7 @@ section {
     }
 }
 
-.manifesto-item,
+.Chamado-item,
 .valor-item,
 .compromisso-item {
     animation: fadeInUp 0.6s ease-out;
