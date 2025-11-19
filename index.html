@@ -4,658 +4,261 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Por Um - Ministério de Jovens</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
-            overflow-x: hidden;
-            background: #FAFBFC;
-            color: #2D3748;
-            line-height: 1.7;
-        }
-
-        .hero {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #FFF2A8 0%, #FFE074 50%, #FFC94D 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            border-bottom: 1px solid #FFB300;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 179, 0, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 50%, rgba(255, 152, 0, 0.15) 0%, transparent 50%);
-            animation: gradientShift 10s ease infinite;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 0.8; }
-        }
-
-        .hero-content {
-            text-align: center;
-            z-index: 2;
-            padding: 3rem;
-            max-width: 900px;
-        }
-
-        .logo-transition {
-            margin-bottom: 3rem;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .old-name {
-            font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: 8px;
-            opacity: 0;
-            animation: fadeIn 1s forwards;
-            color: rgba(66, 66, 66, 0.5);
-        }
-
-        .transition-line {
-            width: 100px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #FFB300, transparent);
-            margin: 1.5rem auto;
-            opacity: 0;
-            animation: fadeIn 1s 1s forwards, glow 2s ease-in-out infinite;
-        }
-
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 5px #FFB300; }
-            50% { box-shadow: 0 0 20px #FFB300; }
-        }
-
-        .new-name {
-            font-size: 5rem;
-            font-weight: 700;
-            letter-spacing: 12px;
-            opacity: 0;
-            animation: fadeIn 1.5s 1.5s forwards;
-            text-transform: uppercase;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, #FFB300 0%, #FF6F00 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero h1 {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-            font-weight: 400;
-            opacity: 0;
-            animation: fadeIn 1s 2.5s forwards;
-            letter-spacing: 2px;
-            color: #424242;
-        }
-
-        .hero-subtitle {
-            font-size: 1.1rem;
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeIn 1s 3s forwards;
-            color: rgba(66, 66, 66, 0.85);
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            font-weight: 300;
-        }
-
-        .hero-verse {
-            font-style: italic;
-            font-size: 1rem;
-            opacity: 0;
-            animation: fadeIn 1s 3.5s forwards;
-            color: rgba(66, 66, 66, 0.75);
-            border-left: 2px solid #FFB300;
-            padding-left: 1.5rem;
-            margin: 2rem auto;
-            max-width: 600px;
-            text-align: left;
-            font-weight: 300;
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        section {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        h3 {
-            font-size: 1.8rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .section-divider {
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #FFB300, transparent);
-            margin: 2rem 0;
-        }
-
-        .manifesto-section {
-            background: #F5F5F5;
-            border-top: 1px solid rgba(255, 179, 0, 0.2);
-        }
-
-        .manifesto-intro {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .manifesto-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1px;
-            background: rgba(255, 179, 0, 0.15);
-            border: 1px solid rgba(255, 179, 0, 0.25);
-        }
-
-        .manifesto-item {
-            padding: 3rem 2rem;
-            background: #FFFFFF;
-            transition: background 0.3s, transform 0.3s;
-        }
-
-        .manifesto-item:hover {
-            background: rgba(255, 179, 0, 0.05);
-            transform: translateY(-2px);
-        }
-
-        .manifesto-number {
-            font-size: 3rem;
-            color: #FFB300;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            font-family: 'Courier New', monospace;
-        }
-
-        .manifesto-title {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
-            letter-spacing: 0.5px;
-            color: #424242;
-            font-weight: 600;
-        }
-
-        .manifesto-text {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: rgba(66, 66, 66, 0.85);
-            font-weight: 300;
-        }
-
-        .significance-section {
-            background: linear-gradient(135deg, #FFF9E6 0%, #FFF3CC 100%);
-            border-top: 1px solid rgba(255, 179, 0, 0.3);
-        }
-
-        .significance-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .significance-block {
-            margin-bottom: 3rem;
-            padding: 2rem;
-            border-left: 2px solid #FFB300;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 4px;
-        }
-
-        .significance-block h3 {
-            color: #F57C00;
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .significance-block p {
-            color: #424242;
-        }
-
-        .verse-block {
-            background: rgba(255, 152, 0, 0.08);
-            padding: 2rem;
-            margin: 3rem 0;
-            border-left: 2px solid #FF6F00;
-            font-style: italic;
-            border-radius: 4px;
-        }
-
-        .verse-text {
-            font-size: 1.2rem;
-            line-height: 1.9;
-            margin-bottom: 1rem;
-            font-weight: 300;
-            color: #424242;
-        }
-
-        .verse-reference {
-            text-align: right;
-            font-weight: 600;
-            color: #FF6F00;
-            font-style: normal;
-        }
-
-        .values-section {
-            background: #F5F5F5;
-            border-top: 1px solid rgba(255, 179, 0, 0.2);
-        }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .value-item {
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            gap: 2rem;
-            padding: 2rem;
-            border: 1px solid rgba(255, 179, 0, 0.25);
-            background: #FFFFFF;
-            transition: all 0.3s;
-        }
-
-        .value-item:hover {
-            border-color: rgba(255, 179, 0, 0.5);
-            background: rgba(255, 179, 0, 0.05);
-            transform: translateX(5px);
-        }
-
-        .value-icon {
-            font-size: 3rem;
-            text-align: center;
-            padding-top: 0.5rem;
-        }
-
-        .value-item h3 {
-            color: #424242;
-        }
-
-        .value-item p {
-            color: rgba(66, 66, 66, 0.85);
-            font-weight: 300;
-        }
-
-        .legacy-section {
-            background: linear-gradient(135deg, #FFF3CC 0%, #FFF9E6 100%);
-            border-top: 1px solid rgba(255, 179, 0, 0.3);
-        }
-
-        .legacy-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .legacy-content p {
-            color: #424242;
-        }
-
-        .legacy-statement {
-            font-size: 1.3rem;
-            line-height: 2;
-            margin: 3rem 0;
-            padding: 2rem;
-            border: 1px solid rgba(255, 179, 0, 0.4);
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 4px;
-            font-weight: 300;
-            color: #424242;
-        }
-
-        .commitment-section {
-            background: #F5F5F5;
-            border-top: 1px solid rgba(255, 179, 0, 0.2);
-        }
-
-        .commitment-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .commitment-card {
-            padding: 3rem 2rem;
-            border: 1px solid rgba(33, 150, 243, 0.25);
-            background: #FFFFFF;
-            transition: all 0.3s;
-        }
-
-        .commitment-card:hover {
-            border-color: rgba(33, 150, 243, 0.5);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(33, 150, 243, 0.15);
-        }
-
-        .commitment-card p {
-            color: #424242;
-        }
-
-        .contact-section {
-            background: linear-gradient(135deg, #E8EAF6 0%, #C5CAE9 100%);
-            border-top: 1px solid rgba(33, 150, 243, 0.3);
-            text-align: center;
-        }
-
-        .contact-info {
-            max-width: 600px;
-            margin: 3rem auto;
-            font-size: 1.1rem;
-            font-weight: 300;
-        }
-
-        .contact-info p {
-            color: #424242;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 3rem;
-            margin-top: 3rem;
-            padding-top: 3rem;
-            border-top: 1px solid rgba(33, 150, 243, 0.3);
-        }
-
-        .social-link {
-            color: #424242;
-            text-decoration: none;
-            font-size: 1rem;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            font-weight: 400;
-            position: relative;
-        }
-
-        .social-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #2196F3, #9C27B0);
-            transition: width 0.3s;
-        }
-
-        .social-link:hover {
-            color: #2196F3;
-        }
-
-        .social-link:hover::after {
-            width: 100%;
-        }
-
-        footer {
-            background: #F5F5F5;
-            padding: 3rem 2rem;
-            text-align: center;
-            border-top: 1px solid rgba(33, 150, 243, 0.2);
-        }
-
-        footer p {
-            color: rgba(66, 66, 66, 0.7);
-        }
-
-        @media (max-width: 768px) {
-            .new-name { font-size: 3rem; letter-spacing: 6px; }
-            .hero h1 { font-size: 1.5rem; }
-            h2 { font-size: 2rem; }
-            .manifesto-grid { grid-template-columns: 1fr; }
-            .value-item { grid-template-columns: 1fr; }
-            .commitment-grid { grid-template-columns: 1fr; }
-            section { padding: 4rem 1.5rem; }
-        }
-
-        .emphasis {
-            color: #2196F3;
-            font-weight: 600;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <section class="hero">
-        <div class="hero-content">
-            <div class="logo-transition">
-                <div class="old-name">MOV</div>
-                <div class="transition-line"></div>
-                <div class="new-name">POR UM</div>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <h2>POR UM</h2>
+                </div>
+                <div class="nav-menu" id="nav-menu">
+                    <a href="#home" class="nav-link">Início</a>
+                    <a href="#Chamado" class="nav-link">Chamado</a>
+                    <a href="#significado" class="nav-link">Significado</a>
+                    <a href="#valores" class="nav-link">Valores</a>
+                    <a href="#compromisso" class="nav-link">Compromisso</a>
+                    <a href="#contato" class="nav-link">Contato</a>
+                </div>
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
             </div>
-            <h1>Uma Nova Identidade, O Mesmo Propósito</h1>
-            <p class="hero-subtitle">
-                Somos uma geração unida por um chamado, comprometida com uma missão, 
-                vivendo como um só corpo para a glória de Cristo
-            </p>
-            <div class="hero-verse">
-                "Esforçando-vos diligentemente por preservar a unidade do Espírito no vínculo da paz; 
-                há somente um corpo e um Espírito, como também fostes chamados numa só esperança da vossa vocação."
-                <br><strong>— Efésios 4:3-4</strong>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>MOV</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="title-main">POR UM</span>
+                </h1>
+                <h2 class="hero-subtitle">Uma Nova Identidade, O Mesmo Propósito</h2>
+                <p class="hero-description">
+                    Somos uma geração unida por um chamado, comprometida com uma missão, 
+                    vivendo como um só corpo para a glória de Cristo
+                </p>
+                <div class="hero-verse">
+                    <blockquote>
+                        "Esforçando-vos diligentemente por preservar a unidade do Espírito no vínculo da paz; 
+                        há somente um corpo e um Espírito, como também fostes chamados numa só esperança da vossa vocação."
+                    </blockquote>
+                    <cite>— Efésios 4:3-4</cite>
+                </div>
+                <div class="hero-cta">
+                    <a href="#Chamado" class="btn btn-primary">Conheça Nosso Chamado</a>
+                    <a href="#contato" class="btn btn-secondary">Faça Parte</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Chamado Section -->
+    <section id="Chamado" class="Chamado">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">O Chamado Por Um</h2>
+                <p class="section-description">
+                    Mais do que um nome, POR UM é uma declaração de propósito. 
+                    É o compromisso de uma geração que escolhe viver unida, lutar junta e avançar como um só corpo.
+                </p>
+            </div>
+
+            <div class="Chamado-grid">
+                <div class="Chamado-item">
+                    <div class="Chamado-number">01</div>
+                    <h3 class="Chamado-title">Por Uma Alma</h3>
+                    <p class="Chamado-description">
+                        Cada vida importa. Estamos dispostos a deixar as noventa e nove para buscar aquela 
+                        que se perdeu. Nosso compromisso é com cada jovem que ainda não conhece o amor de Cristo.
+                    </p>
+                </div>
+
+                <div class="Chamado-item">
+                    <div class="Chamado-number">02</div>
+                    <h3 class="Chamado-title">Por Uma Geração</h3>
+                    <p class="Chamado-description">
+                        Somos chamados para impactar nossa geração. Não apenas os que estão dentro das 
+                        paredes da igreja, mas todos os jovens que Deus colocou ao nosso alcance.
+                    </p>
+                </div>
+
+                <div class="Chamado-item">
+                    <div class="Chamado-number">03</div>
+                    <h3 class="Chamado-title">Por Um Propósito</h3>
+                    <p class="Chamado-description">
+                        Unidos pelo mesmo chamado: fazer discípulos de Cristo. Um propósito que nos 
+                        conecta, nos fortalece e nos direciona para além de nós mesmos.
+                    </p>
+                </div>
+
+                <div class="Chamado-item">
+                    <div class="Chamado-number">04</div>
+                    <h3 class="Chamado-title">Por Um Corpo</h3>
+                    <p class="Chamado-description">
+                        Somos membros uns dos outros. A diversidade nos enriquece, mas a unidade nos 
+                        fortalece. Juntos, somos a expressão viva do corpo de Cristo.
+                    </p>
+                </div>
+
+                <div class="Chamado-item">
+                    <div class="Chamado-number">05</div>
+                    <h3 class="Chamado-title">Por Um Reino</h3>
+                    <p class="Chamado-description">
+                        Nossa lealdade é ao Reino de Deus. Trabalhamos não para construir impérios pessoais, 
+                        mas para avançar o Reino eterno através de cada vida transformada.
+                    </p>
+                </div>
+
+                <div class="Chamado-item">
+                    <div class="Chamado-number">06</div>
+                    <h3 class="Chamado-title">Por Um Legado</h3>
+                    <p class="Chamado-description">
+                        O que construímos hoje ecoará na eternidade. Vivemos com intencionalidade, 
+                        sabendo que cada decisão molda o legado que deixaremos para as próximas gerações.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="manifesto-section">
-        <div class="manifesto-intro">
-            <h2>O Manifesto Por Um</h2>
-            <div class="section-divider"></div>
-            <p style="font-size: 1.2rem; color: rgba(66,66,66,0.85); max-width: 700px; margin: 2rem auto; font-weight: 300;">
-                Mais do que um nome, <span class="emphasis">POR UM</span> é uma declaração de propósito. 
-                É o compromisso de uma geração que escolhe viver unida, lutar junta e avançar como um só corpo.
-            </p>
-        </div>
-
-        <div class="manifesto-grid">
-            <div class="manifesto-item">
-                <div class="manifesto-number">01</div>
-                <div class="manifesto-title">Por Uma Alma</div>
-                <p class="manifesto-text">
-                    Cada vida importa. Estamos dispostos a deixar as noventa e nove para buscar aquela 
-                    que se perdeu. Nosso compromisso é com cada jovem que ainda não conhece o amor de Cristo.
-                </p>
+    <!-- Significado Section -->
+    <section id="significado" class="significado">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">O Significado de Por Um</h2>
             </div>
 
-            <div class="manifesto-item">
-                <div class="manifesto-number">02</div>
-                <div class="manifesto-title">Por Uma Geração</div>
-                <p class="manifesto-text">
-                    Somos chamados para impactar nossa geração. Não apenas os que estão dentro das 
-                    paredes da igreja, mas todos os jovens que Deus colocou ao nosso alcance.
-                </p>
-            </div>
+            <div class="significado-content">
+                <div class="significado-item">
+                    <h3>A Essência da Unidade</h3>
+                    <p>
+                        POR UM não é apenas um nome — é nossa identidade. 
+                        Expressa quem somos: jovens que escolheram viver em unidade, não por conveniência, 
+                        mas por convicção. A unidade pela qual Cristo orou em João 17 não é opcional; 
+                        é o testemunho mais poderoso que podemos dar ao mundo.
+                    </p>
+                    <blockquote>
+                        "Para que todos sejam um, como Tu, ó Pai, o és em mim, e eu em Ti; 
+                        que também eles sejam um em nós, para que o mundo creia que Tu me enviaste."
+                        <cite>— João 17:21</cite>
+                    </blockquote>
+                </div>
 
-            <div class="manifesto-item">
-                <div class="manifesto-number">03</div>
-                <div class="manifesto-title">Por Um Propósito</div>
-                <p class="manifesto-text">
-                    Unidos pelo mesmo chamado: fazer discípulos de Cristo. Um propósito que nos 
-                    conecta, nos fortalece e nos direciona para além de nós mesmos.
-                </p>
-            </div>
+                <div class="significado-item">
+                    <h3>O Poder da Comunhão</h3>
+                    <p>
+                        Quando os irmãos vivem em união, ali o Senhor ordena a sua bênção. 
+                        POR UM representa nosso compromisso com a comunhão genuína — 
+                        não superficial, mas profunda; não institucional, mas relacional. Somos uma família 
+                        espiritual que caminha junta, chora junta, celebra junta e vence junta.
+                    </p>
+                    <blockquote>
+                        "Oh! Quão bom e quão suave é que os irmãos vivam em união! 
+                        É como o óleo precioso sobre a cabeça... porque ali o Senhor ordena a bênção 
+                        e a vida para sempre."
+                        <cite>— Salmos 133:1,3</cite>
+                    </blockquote>
+                </div>
 
-            <div class="manifesto-item">
-                <div class="manifesto-number">04</div>
-                <div class="manifesto-title">Por Um Corpo</div>
-                <p class="manifesto-text">
-                    Somos membros uns dos outros. A diversidade nos enriquece, mas a unidade nos 
-                    fortalece. Juntos, somos a expressão viva do corpo de Cristo.
-                </p>
-            </div>
-
-            <div class="manifesto-item">
-                <div class="manifesto-number">05</div>
-                <div class="manifesto-title">Por Um Reino</div>
-                <p class="manifesto-text">
-                    Nossa lealdade é ao Reino de Deus. Trabalhamos não para construir impérios pessoais, 
-                    mas para avançar o Reino eterno através de cada vida transformada.
-                </p>
-            </div>
-
-            <div class="manifesto-item">
-                <div class="manifesto-number">06</div>
-                <div class="manifesto-title">Por Um Legado</div>
-                <p class="manifesto-text">
-                    O que construímos hoje ecoará na eternidade. Vivemos com intencionalidade, 
-                    sabendo que cada decisão molda o legado que deixaremos para as próximas gerações.
-                </p>
+                <div class="significado-item">
+                    <h3>A Força do Propósito Compartilhado</h3>
+                    <p>
+                        Quando todos pensamos a mesma coisa, temos o mesmo amor e somos unidos de alma, 
+                        tornamo-nos uma força imparável para o Reino. POR UM 
+                        declara que não estamos fragmentados em agendas individuais, mas alinhados sob um 
+                        mesmo propósito: ver vidas transformadas pelo evangelho de Jesus Cristo.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="significance-section">
-        <div class="significance-content">
-            <h2>O Significado de Por Um</h2>
-            <div class="section-divider"></div>
-
-            <div class="significance-block">
-                <h3>A Essência da Unidade</h3>
-                <p>
-                    <span class="emphasis">POR UM</span> não é apenas um nome — é nossa identidade. 
-                    Expressa quem somos: jovens que escolheram viver em unidade, não por conveniência, 
-                    mas por convicção. A unidade pela qual Cristo orou em João 17 não é opcional; 
-                    é o testemunho mais poderoso que podemos dar ao mundo.
+    <!-- Valores Section -->
+    <section id="valores" class="valores">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nossos Valores Fundamentais</h2>
+                <p class="section-description">
+                    Os princípios que guiam cada decisão, cada evento, cada relacionamento em POR UM
                 </p>
             </div>
 
-            <div class="verse-block">
-                <p class="verse-text">
-                    "Para que todos sejam um, como Tu, ó Pai, o és em mim, e eu em Ti; 
-                    que também eles sejam um em nós, para que o mundo creia que Tu me enviaste."
-                </p>
-                <p class="verse-reference">— João 17:21</p>
-            </div>
-
-            <div class="significance-block">
-                <h3>O Poder da Comunhão</h3>
-                <p>
-                    Quando os irmãos vivem em união, ali o Senhor ordena a sua bênção. 
-                    <span class="emphasis">POR UM</span> representa nosso compromisso com a comunhão genuína — 
-                    não superficial, mas profunda; não institucional, mas relacional. Somos uma família 
-                    espiritual que caminha junta, chora junta, celebra junta e vence junta.
-                </p>
-            </div>
-
-            <div class="verse-block">
-                <p class="verse-text">
-                    "Oh! Quão bom e quão suave é que os irmãos vivam em união! 
-                    É como o óleo precioso sobre a cabeça... porque ali o Senhor ordena a bênção 
-                    e a vida para sempre."
-                </p>
-                <p class="verse-reference">— Salmos 133:1,3</p>
-            </div>
-
-            <div class="significance-block">
-                <h3>A Força do Propósito Compartilhado</h3>
-                <p>
-                    Quando todos pensamos a mesma coisa, temos o mesmo amor e somos unidos de alma, 
-                    tornamo-nos uma força imparável para o Reino. <span class="emphasis">POR UM</span> 
-                    declara que não estamos fragmentados em agendas individuais, mas alinhados sob um 
-                    mesmo propósito: ver vidas transformadas pelo evangelho de Jesus Cristo.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <section class="values-section">
-        <h2>Nossos Valores Fundamentais</h2>
-        <div class="section-divider"></div>
-        <p style="text-align: center; font-size: 1.1rem; color: rgba(66,66,66,0.85); margin-bottom: 3rem; font-weight: 300;">
-            Os princípios que guiam cada decisão, cada evento, cada relacionamento em <span class="emphasis">POR UM</span>
-        </p>
-
-        <div class="values-grid">
-            <div class="value-item">
-                <div class="value-icon">✟</div>
-                <div>
+            <div class="valores-grid">
+                <div class="valor-item">
+                    <div class="valor-icon">
+                        <i class="fas fa-cross"></i>
+                    </div>
                     <h3>Cristo como Centro</h3>
-                    <p style="margin-top: 1rem;">
+                    <p>
                         Tudo o que fazemos flui de nossa relação com Jesus. Ele não é um tema — 
                         Ele é o fundamento, a razão e o objetivo de nossa existência como ministério.
                     </p>
                 </div>
-            </div>
 
-            <div class="value-item">
-                <div class="value-icon">📖</div>
-                <div>
+                <div class="valor-item">
+                    <div class="valor-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
                     <h3>Palavra como Autoridade</h3>
-                    <p style="margin-top: 1rem;">
+                    <p>
                         A Bíblia não é uma de nossas referências — é a nossa única regra de fé e prática. 
                         Cada decisão, ensinamento e direção é submetida à autoridade das Escrituras.
                     </p>
                 </div>
-            </div>
 
-            <div class="value-item">
-                <div class="value-icon">🤝</div>
-                <div>
+                <div class="valor-item">
+                    <div class="valor-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
                     <h3>Unidade como Testemunho</h3>
-                    <p style="margin-top: 1rem;">
+                    <p>
                         Nossa unidade não é negociável. Protegemos a paz, celebramos a diversidade e 
                         trabalhamos incansavelmente para preservar o vínculo que nos une em Cristo.
                     </p>
                 </div>
-            </div>
 
-            <div class="value-item">
-                <div class="value-icon">🔥</div>
-                <div>
+                <div class="valor-item">
+                    <div class="valor-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
                     <h3>Excelência como Adoração</h3>
-                    <p style="margin-top: 1rem;">
+                    <p>
                         Fazemos tudo como para o Senhor. Excelência não é perfeccionismo — é o compromisso 
                         de dar o melhor de nós em cada detalhe, porque servimos a um Deus de excelência.
                     </p>
                 </div>
-            </div>
 
-            <div class="value-item">
-                <div class="value-icon">💙</div>
-                <div>
+                <div class="valor-item">
+                    <div class="valor-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
                     <h3>Amor como Identidade</h3>
-                    <p style="margin-top: 1rem;">
+                    <p>
                         Seremos conhecidos pelo amor que demonstramos uns pelos outros e pelo mundo. 
                         Amor que acolhe, que confronta em graça, que serve sem esperar retorno.
                     </p>
                 </div>
-            </div>
 
-            <div class="value-item">
-                <div class="value-icon">🌍</div>
-                <div>
+                <div class="valor-item">
+                    <div class="valor-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
                     <h3>Missão como Essência</h3>
-                    <p style="margin-top: 1rem;">
+                    <p>
                         Não existimos para nós mesmos. Somos um ministério voltado para fora, 
                         comprometido em alcançar, discipular e enviar jovens para todas as esferas da sociedade.
                     </p>
@@ -664,101 +267,126 @@
         </div>
     </section>
 
-    <section class="legacy-section">
-        <div class="legacy-content">
-            <h2>Do MOV ao Por Um: Uma Continuidade</h2>
-            <div class="section-divider" style="margin-left: auto; margin-right: auto;"></div>
-            
-            <p style="font-size: 1.2rem; margin: 2rem 0; font-weight: 300;">
-                O nome mudou, mas nossa história continua. Cada momento vivido como MOV 
-                foi um degrau que nos trouxe até aqui.
-            </p>
-
-            <div class="legacy-statement">
-                Honramos nosso passado. Celebramos cada culto, cada célula, cada vida transformada. 
-                As lágrimas de alegria, as orações respondidas, os relacionamentos construídos — 
-                nada se perde. Tudo permanece como fundação do que estamos nos tornando.
-                <br><br>
-                <span class="emphasis">POR UM</span> não nega o MOV; <span class="emphasis">POR UM</span> é o MOV amadurecido, 
-                clarificado, direcionado. É a mesma paixão com mais foco. A mesma fé com mais fundamento. 
-                O mesmo amor com mais profundidade.
-            </div>
-
-            <p style="font-size: 1.1rem; margin-top: 3rem; font-weight: 300;">
-                A mudança de nome não é uma ruptura — é uma revelação. 
-                É a manifestação externa do que sempre fomos internamente: 
-                <br><br>
-                <strong style="font-size: 1.3rem; color: #2196F3;">Um corpo. Um espírito. Um Senhor. Um propósito.</strong>
-            </p>
-        </div>
-    </section>
-
-    <section class="commitment-section">
-        <h2>Nosso Compromisso</h2>
-        <div class="section-divider"></div>
-
-        <div class="commitment-grid">
-            <div class="commitment-card">
-                <h3 style="color: #2196F3; margin-bottom: 1.5rem; font-weight: 500;">Missão</h3>
-                <p style="font-size: 1.05rem; font-weight: 300;">
-                    Alcançar jovens com o evangelho de Jesus Cristo, discipulá-los na Palavra 
-                    e equipá-los para viverem plenamente o propósito de Deus, transformando 
-                    suas famílias, comunidades e sociedade através do amor e da verdade.
+    <!-- Continuidade Section -->
+    <section class="continuidade">
+        <div class="container">
+            <div class="continuidade-content">
+                <h2>Do MOV ao Por Um: Uma Continuidade</h2>
+                <p class="lead">
+                    O nome mudou, mas nossa história continua. Cada momento vivido como MOV 
+                    foi um degrau que nos trouxe até aqui.
                 </p>
-            </div>
-
-            <div class="commitment-card">
-                <h3 style="color: #2196F3; margin-bottom: 1.5rem; font-weight: 500;">Visão</h3>
-                <p style="font-size: 1.05rem; font-weight: 300;">
-                    Ser uma geração de jovens radicalmente comprometidos com Cristo, 
-                    vivendo em unidade como um só corpo, impactando o Brasil e as nações 
-                    com o Reino de Deus através de relacionamentos genuínos e discipulado intencional.
-                </p>
-            </div>
-
-            <div class="commitment-card">
-                <h3 style="color: #2196F3; margin-bottom: 1.5rem; font-weight: 500;">Estratégia</h3>
-                <p style="font-size: 1.05rem; font-weight: 300;">
-                    Células de vida: pequenos grupos onde relacionamentos profundos são cultivados.
-                    <br><br>
-                    Cultos de celebração: momentos de adoração corporativa e ensino fundamentado.
-                    <br><br>
-                    Discipulado um a um: investimento pessoal na formação de discípulos que fazem discípulos.
-                </p>
+                <div class="continuidade-text">
+                    <p>
+                        Honramos nosso passado. Celebramos cada culto, cada célula, cada vida transformada. 
+                        As lágrimas de alegria, as orações respondidas, os relacionamentos construídos — 
+                        nada se perde. Tudo permanece como fundação do que estamos nos tornando.
+                    </p>
+                    <p>
+                        <strong>POR UM</strong> não nega o MOV; <strong>POR UM</strong> é o MOV amadurecido, 
+                        clarificado, direcionado. É a mesma paixão com mais foco. A mesma fé com mais fundamento. 
+                        O mesmo amor com mais profundidade.
+                    </p>
+                    <p class="highlight">
+                        A mudança de nome não é uma ruptura — é uma revelação. 
+                        É a manifestação externa do que sempre fomos internamente: 
+                        <br><br>
+                        <strong>Um corpo. Um espírito. Um Senhor. Um propósito.</strong>
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section class="contact-section">
-        <h2>Faça Parte de Por Um</h2>
-        <div class="section-divider" style="margin-left: auto; margin-right: auto;"></div>
+    <!-- Compromisso Section -->
+    <section id="compromisso" class="compromisso">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Nosso Compromisso</h2>
+            </div>
 
-        <div class="contact-info">
-            <p style="margin-bottom: 2rem;">
-                Esta é uma jornada que não fazemos sozinhos. <span class="emphasis">POR UM</span> 
-                é formado por pessoas — pessoas reais, com histórias reais, servindo a um Deus real.
-            </p>
-            <p style="margin-bottom: 2rem;">
-                Se você é jovem e busca uma comunidade onde possa crescer na fé, servir com propósito 
-                e fazer parte de algo maior que você mesmo, este é o seu lugar.
-            </p>
-            <p style="font-size: 1.2rem; font-weight: 600; color: #2196F3;">
-                Juntos, somos mais fortes. Juntos, avançamos. Juntos, somos POR UM.
-            </p>
-        </div>
+            <div class="compromisso-grid">
+                <div class="compromisso-item">
+                    <h3>Missão</h3>
+                    <p>
+                        Alcançar jovens com o evangelho de Jesus Cristo, discipulá-los na Palavra 
+                        e equipá-los para viverem plenamente o propósito de Deus, transformando 
+                        suas famílias, comunidades e sociedade através do amor e da verdade.
+                    </p>
+                </div>
 
-        <div class="social-links">
-            <a href="#" class="social-link">Instagram</a>
-            <a href="#" class="social-link">YouTube</a>
-            <a href="#" class="social-link">WhatsApp</a>
+                <div class="compromisso-item">
+                    <h3>Visão</h3>
+                    <p>
+                        Ser uma geração de jovens radicalmente comprometidos com Cristo, 
+                        vivendo em unidade como um só corpo, impactando o Brasil e as nações 
+                        com o Reino de Deus através de relacionamentos genuínos e discipulado intencional.
+                    </p>
+                </div>
+
+                <div class="compromisso-item">
+                    <h3>Estratégia</h3>
+                    <div class="estrategia-list">
+                        <div class="estrategia-item">
+                            <strong>Células de vida:</strong> pequenos grupos onde relacionamentos profundos são cultivados.
+                        </div>
+                        <div class="estrategia-item">
+                            <strong>Cultos de celebração:</strong> momentos de adoração corporativa e ensino fundamentado.
+                        </div>
+                        <div class="estrategia-item">
+                            <strong>Discipulado um a um:</strong> investimento pessoal na formação de discípulos que fazem discípulos.
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <p style="opacity: 0.6; font-size: 0.9rem;">
-            © 2025 Por Um — Ministério de Jovens<br>
-            Uma nova identidade. O mesmo propósito. Um só corpo em Cristo.
-        </p>
+    <!-- CTA Section -->
+    <section id="contato" class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Faça Parte de Por Um</h2>
+                <p>
+                    Esta é uma jornada que não fazemos sozinhos. <strong>POR UM</strong> 
+                    é formado por pessoas — pessoas reais, com histórias reais, servindo a um Deus real.
+                </p>
+                <p>
+                    Se você é jovem e busca uma comunidade onde possa crescer na fé, servir com propósito 
+                    e fazer parte de algo maior que você mesmo, este é o seu lugar.
+                </p>
+                <p class="cta-highlight">
+                    Juntos, somos mais fortes. Juntos, avançamos. Juntos, somos <strong>POR UM</strong>.
+                </p>
+                
+                <div class="social-links">
+                    <a href="https://www.instagram.com/oficialmov" target="_blank" rel="noopener noreferrer" class="social-link">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://www.youtube.com/@ComunidadeZoe" target="_blank" rel="noopener noreferrer" class="social-link">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                    <a href="https://chat.whatsapp.com/FaiXgTPtfi6E6eJDKNk41i" target="_blank" rel="noopener noreferrer" class="social-link">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Por Um — Ministério de Jovens</p>
+                <p>Uma nova identidade. O mesmo propósito. Um só corpo em Cristo.</p>
+            </div>
+        </div>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
