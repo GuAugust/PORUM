@@ -64,9 +64,9 @@ window.addEventListener('scroll', function() {
 
 // Hero scroll indicator
 document.querySelector('.hero-scroll')?.addEventListener('click', function() {
-    const manifestoSection = document.getElementById('manifesto');
-    if (manifestoSection) {
-        manifestoSection.scrollIntoView({ behavior: 'smooth' });
+    const ChamadoSection = document.getElementById('Chamado');
+    if (ChamadoSection) {
+        ChamadoSection.scrollIntoView({ behavior: 'smooth' });
     }
 });
 
@@ -87,7 +87,7 @@ const observer = new IntersectionObserver(function(entries) {
 
 // Observe elements for animation
 document.addEventListener('DOMContentLoaded', function() {
-    const animatedElements = document.querySelectorAll('.manifesto-item, .valor-item, .compromisso-item, .significado-item');
+    const animatedElements = document.querySelectorAll('.Chamado-item, .valor-item, .compromisso-item, .significado-item');
     
     animatedElements.forEach(el => {
         el.style.opacity = '0';
